@@ -24,5 +24,15 @@ export default function QueryProcessor(query: string): string {
     return numbers.length > 0 ? Math.max(...numbers).toString() : "No numbers found";
   }
 
+  if (/what is \d+ plus \d+/i.test(query)) {
+    // Extract the two numbers from the query
+    const matches = query.match(/\d+/g);
+    if (matches && matches.length === 2) {
+      const [num1, num2] = matches.map(Number);
+      return (num1 + num2).toString();
+    }
+    return "Invalid input";
+  }
+
   return "";
 }
